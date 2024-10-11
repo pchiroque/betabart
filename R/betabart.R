@@ -394,8 +394,13 @@ beta_bart <- function(x, y, trees = 200,
   }
 
   sampleZ <- function(y,y.hat){
-    abs(rnorm(length(y),y.hat,1))*(-1)^{y==0}
+    pointZero <- pnorm(0, y.hat)
+    qnorm(runif(length(y),
+                ifelse(y, pointZero, 0),
+                ifelse(y, 1, pointZero)),
+          y.hat)
   }
+
   # Burn
   #sigma2 <- 1
   baseTree <- list(variable = NA, rule = NA, expectedY = list(c(0,0,0)),
