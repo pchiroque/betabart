@@ -431,8 +431,13 @@ beta_bart <- function(x, y, trees = 200,
   checkpoints <- round(seq(0.1, 1, by = 0.1) * mcmc$sample)
 
   # For storing output
-  posterior <- data.frame(sigma2 = numeric(mcmc$sample))
-  for (i in seq(y)) posterior[paste0("y", i)] <- numeric(mcmc$sample)
+
+  posterior <- data.frame()
+  for (i in seq(y)) {
+    posterior[paste0("y1", i)] <- numeric(mcmc$sample)
+    posterior[paste0("yb", i)] <- numeric(mcmc$sample)
+    posterior[paste0("y0", i)] <- numeric(mcmc$sample)
+  }
 
   # Let's go!
   for (iter in seq(mcmc$sample)) {
