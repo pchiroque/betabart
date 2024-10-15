@@ -1,5 +1,5 @@
 ## Installation
-Install this packge via `remotes::install_github("pchiroque/betabart")`.
+Install this package via `remotes::install_github("pchiroque/betabart")`.
 
 ## Usage 
 The response `y` must be a `data.frame` with columns `y1`,`yb` and `y0`. 
