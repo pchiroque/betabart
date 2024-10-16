@@ -7,7 +7,7 @@ betabart.predict <- function(fit){
   y0index <- grep("y0",names(fit$fit))
 
   # one prediction using probability of each case to be one
-  y1.predict <- map_df(fit$fit[y1index[-1]],pnorm)%>%
+  y1.predict <- map_df(fit$fit[y1index],pnorm)%>%
     map_df(function(x) sapply(x,function(p)rbinom(1,1,p)))
 
   # The expected value of the yb
