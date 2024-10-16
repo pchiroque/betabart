@@ -318,9 +318,9 @@ updateMus <- function(tree, x, yb, r1, r0, eta, priorMu1, priorMub, priorMu0) {
   for (i in seq_along(tree$expectedY)) {
     if (is.na(tree$variable[i])){
       tree$expectedY[[i]] <- numeric(3)
-      tree$expectedY[[i]][1] <- updateOneMu01(r1, priorMu1)
+      tree$expectedY[[i]][1] <- updateOneMu01(r1[decisions[[i]]], priorMu1)
       tree$expectedY[[i]][2] <- updateOneMub(yb[decisions[[i]]], priorMub, eta[decisions[[i]]])
-      tree$expectedY[[i]][3] <- updateOneMu01(r0, priorMu0)
+      tree$expectedY[[i]][3] <- updateOneMu01(r0[decisions[[i]]], priorMu0)
     }
     else
       tree$expectedY[[i]] <- NA
@@ -339,7 +339,7 @@ updateSigma2 <- function(trees, x, y, prior) {
 
 #' @export
 beta_bart <- function(x, y, trees = 200,
-                      priorMub = list(a_beta = 2, b_beta = 1), # High prior prob that mub in (-5, 5) and mode = 0
+                      priorMub = list(a_beta = 0.5, b_beta = 0.15), # High prior prob that mub in (-5, 5) and mean = 0
                       priorMu1 = list(mean = 0, variance = 9 / (4 * trees)), # Chipman (2010)
                       priorMu0 = list(mean = 0, variance = 9 / (4 * trees)), # Chipman (2010)
                       mcmc = list(burnin = 1000, sample = 5000)) {
