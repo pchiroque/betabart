@@ -339,7 +339,7 @@ updateSigma2 <- function(trees, x, y, prior) {
 
 #' @export
 beta_bart <- function(x, y, trees = 200,
-                      priorMub = list(a_beta = 0.5, b_beta = 0.15), # High prior prob that mub in (-5, 5) and mean = 0
+                      priorMub = list(a_beta = 0.5, b_beta = 0.15), # High prior prob that mub in (-5, 5) and mean close to 0
                       priorMu1 = list(mean = 0, variance = 9 / (4 * trees)), # Chipman (2010)
                       priorMu0 = list(mean = 0, variance = 9 / (4 * trees)), # Chipman (2010)
                       mcmc = list(burnin = 1000, sample = 5000)) {
