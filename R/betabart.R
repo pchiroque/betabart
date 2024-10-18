@@ -395,11 +395,12 @@ beta_bart <- function(x, y, trees = 200,
 
   sampleZ <- function(y,y.hat){
     pointZero <- pnorm(0, y.hat)
-    qnorm(runif(length(y),
-                ifelse(y, pointZero, 0),
-                ifelse(y, 1, pointZero)),
-          y.hat)
-  }
+    suppressWarnings(qnorm(runif(length(y),
+                                 ifelse(y, pointZero, 0),
+                                 ifelse(y, 1, pointZero)),
+                           y.hat)
+    )
+    }
 
   # Burn
   #sigma2 <- 1
@@ -432,7 +433,7 @@ beta_bart <- function(x, y, trees = 200,
 
   # For storing output
 
-  posterior <- data.frame()
+  posterior <- data.frame(iteration = 1:mcmc$sample)
   for (i in seq(y)) {
     posterior[paste0("y1", i)] <- numeric(mcmc$sample)
     posterior[paste0("yb", i)] <- numeric(mcmc$sample)
