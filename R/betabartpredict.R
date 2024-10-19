@@ -17,7 +17,7 @@ betabart.predict <- function(fit){
   y0.predict <- map_df(fit$fit[y0index],pnorm)%>%
     map_df(function(x) sapply(x,function(p)rbinom(1,1,p)))
 
-  y.predict <- do.call(cbind,lapply(1:nrow(y_mod),function(i)ifelse(y_mod$y1[[i]]==0,(y_mod$y1[[i]]==0)*(ifelse(y_mod$y0[[i]]==0,y_mod$yb[[i]],0)),1)))
+  y.predict <- do.call(cbind,lapply(1:nrow(y),function(i)ifelse(y1.predict[[i]]==0,(y1.predict[[i]]==0)*(ifelse(y0.predict[[i]]==0,yb.predict[[i]],0)),1)))
 
   y.predict
 }
